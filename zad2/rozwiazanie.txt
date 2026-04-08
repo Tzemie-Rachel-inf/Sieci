@@ -6,7 +6,7 @@
 - 192.168.10.176/28 E
 - 192.168.10.192/26 F
 
-A:
+A: LAN
 Adres: 192.168.10.0/26
 Pierwszy host: 192.168.10.1
 Ostatni host: 192.168.10.62
@@ -15,7 +15,7 @@ Ilość dostępnych hostów: 62
 Względnej minimalnej: +21 (62 - 41)
 Względem over-provisioningu: +1 (62 - 61)
 
-B:
+B: WiFi
 Adres: 192.168.10.64/26
 Pierwszy host: 192.168.10.65
 Ostatni host: 192.168.10.126
@@ -24,7 +24,7 @@ Ilość dostępnych hostów: 62
 Względnej minimalnej: +36 (62 - 26)
 Względem over-provisioningu: +23 (62 - 39)
 
-C:
+C: Serwery
 Adres: 192.168.10.128/27
 Pierwszy host: 192.168.10.129
 Ostatni host: 192.168.10.158
@@ -33,7 +33,7 @@ Ilość dostępnych hostów: 30
 Względnej minimalnej: +17 (30 - 13)
 Względem over-provisioningu: +11 (30 - 19)
 
-D:
+D: Drukarki
 Adres: 192.168.10.160/28
 Pierwszy host: 192.168.10.161
 Ostatni host: 192.168.10.174
@@ -42,7 +42,7 @@ Ilość dostępnych hostów: 14
 Względnej minimalnej: +5 (14 - 9)
 Względem over-provisioningu: +1 (14 - 13)
 
-E:
+E: Inne
 Adres: 192.168.10.176/28
 Pierwszy host: 192.168.10.177
 Ostatni host: 192.168.10.190
