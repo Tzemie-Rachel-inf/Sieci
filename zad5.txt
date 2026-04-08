@@ -1,0 +1,12 @@
+1. ip -br link | awk '{print $1} {print $2}'
+
+lo UNKNOWN
+enp0s31f6 UP
+docker0 DOWN
+br-d63acb0bc05f DOWN
+
+2. ip route 
+ip neigh
+d4:76:a0:e4:71:ef
+
+3.
