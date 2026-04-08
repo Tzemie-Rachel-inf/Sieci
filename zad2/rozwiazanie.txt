@@ -1,0 +1,54 @@
+192.168.10.0/24 
+- 192.168.10.0/26   A
+- 192.168.10.64/26  B
+- 192.168.10.128/27 C
+- 192.168.10.160/28 D
+- 192.168.10.176/28 E
+- 192.168.10.192/26 F
+
+A:
+Adres: 192.168.10.0/26
+Pierwszy host: 192.168.10.1
+Ostatni host: 192.168.10.62
+Broadcast: 192.168.10.63
+Ilość dostępnych hostów: 62
+Względnej minimalnej: +21 (62 - 41)
+Względem over-provisioningu: +1 (62 - 61)
+
+B:
+Adres: 192.168.10.64/26
+Pierwszy host: 192.168.10.65
+Ostatni host: 192.168.10.126
+Broadcast: 192.168.10.127
+Ilość dostępnych hostów: 62
+Względnej minimalnej: +36 (62 - 26)
+Względem over-provisioningu: +23 (62 - 39)
+
+C:
+Adres: 192.168.10.128/27
+Pierwszy host: 192.168.10.129
+Ostatni host: 192.168.10.158
+Broadcast: 192.168.10.159
+Ilość dostępnych hostów: 30
+Względnej minimalnej: +17 (30 - 13)
+Względem over-provisioningu: +11 (30 - 19)
+
+D:
+Adres: 192.168.10.160/28
+Pierwszy host: 192.168.10.161
+Ostatni host: 192.168.10.174
+Broadcast: 192.168.10.175
+Ilość dostępnych hostów: 14
+Względnej minimalnej: +5 (14 - 9)
+Względem over-provisioningu: +1 (14 - 13)
+
+E:
+Adres: 192.168.10.176/28
+Pierwszy host: 192.168.10.177
+Ostatni host: 192.168.10.190
+Broadcast: 192.168.10.191
+Ilość dostępnych hostów: 14
+Względnej minimalnej: +9 (14 - 5)
+Względem over-provisioningu: +7 (14 - 7)
+
+F - niewykorzystana pula 64
