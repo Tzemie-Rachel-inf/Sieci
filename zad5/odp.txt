@@ -1,0 +1,123 @@
+================================================================================
+ZADANIA DIAGNOSTYCZNE - SIECI KOMPUTEROWE
+================================================================================
+
+1. PYTANIE: Lista interfejsów sieciowych w systemie (format: nazwa-status).
+   POLECENIE: ip addr
+   ODPOWIEDŹ:
+   lo       UNKNOWN
+   enp0s25  DOWN
+   wlan0    UP
+
+--------------------------------------------------------------------------------
+2. PYTANIE: Adres MAC routera, który łączy sieć pracowni z internetem.
+   POLECENIE: ip route (aby poznać IP bramy) -> ip neigh (aby poznać MAC)
+   ODPOWIEDŹ:
+   6c:3b:6b:fe:c0:d1
+
+--------------------------------------------------------------------------------
+3. PYTANIE: Zmiana adresu MAC karty sieciowej Ethernet na inną wartość.
+   POLECENIE: 
+   ip link set dev enp0s25 address xx:xx:xx:xx:xx:xx
+
+--------------------------------------------------------------------------------
+4. PYTANIE: Ping wszystkich urządzeń jednocześnie w podsieci pracowni.
+   POLECENIE: ip addr (aby poznać adres rozgłoszeniowy), a następnie:
+   ping -b 192.168.88.255
+
+--------------------------------------------------------------------------------
+5. PYTANIE: Skan całej podsieci pracowni w poszukiwaniu urządzeń z otwartym portem 22.
+   POLECENIE: nmap -Pn -p22 --open 192.168.88.0/24
+   WYNIK:
+   Starting Nmap 7.99 ( https://nmap.org ) at 2026-04-08 01:32 +0200
+   Nmap scan report for router.lan (192.168.88.1)
+   Host is up (0.0014s latency).
+
+   PORT   STATE SERVICE
+   22/tcp open  ssh
+
+   Nmap done: 256 IP addresses (256 hosts up) scanned in 7.85 seconds
+
+--------------------------------------------------------------------------------
+6. PYTANIE: Skan wszystkich portów, które są otwarte na interfejsie lo (loopback).
+   POLECENIE: nmap -e lo 127.0.0.1
+   WYNIK:
+   Starting Nmap 7.99 ( https://nmap.org ) at 2026-04-08 01:37 +0200
+   Nmap scan report for localhost (127.0.0.1)
+   Host is up (0.00010s latency).
+   All 1000 scanned ports on localhost (127.0.0.1) are in ignored states.
+   Not shown: 1000 closed tcp ports (conn-refused)
+
+   Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds
+
+--------------------------------------------------------------------------------
+7. PYTANIE: Porty otwarte w systemie wraz z numerem PID procesu i nazwą programu.
+   POLECENIE: ss -tlpn
+   WYNIK:
+   State  Recv-Q Send-Q Local Address:Port Peer Address:Port Process                                    
+   LISTEN 0      4096   127.0.0.53%lo:53   0.0.0.0:* users:(("systemd-resolve",pid=463,fd=23))
+   LISTEN 0      4096         0.0.0.0:5355 0.0.0.0:* users:(("systemd-resolve",pid=463,fd=14))
+   LISTEN 0      4096      127.0.0.54:53   0.0.0.0:* users:(("systemd-resolve",pid=463,fd=25))
+   LISTEN 0      4096            [::]:5355      [::]:* users:(("systemd-resolve",pid=463,fd=16))
+
+--------------------------------------------------------------------------------
+8. PYTANIE: Wyświetl trasę domyślną w systemie.
+   POLECENIE: ip route
+   ODPOWIEDŹ: 
+   192.168.88.1
+
+--------------------------------------------------------------------------------
+9. PYTANIE: Trasa pakietów, które trafiają do serwera kosmatka.pl.
+   POLECENIE: traceroute kosmatka.pl
+   WYNIK:
+   traceroute to kosmatka.pl (217.28.148.190), 30 hops max, 60 byte packets
+    1  router.lan (192.168.88.1)  1.176 ms  2.414 ms  2.420 ms
+    2  192.168.254.255 (192.168.254.255)  2.417 ms  2.411 ms  2.405 ms
+    3  pw-gw.plock.pl (148.81.246.1)  3.200 ms  2.922 ms  3.468 ms
+    4  m109.c149.petrotel.pl (217.28.149.109)  3.647 ms  4.131 ms  4.093 ms
+    5  plocc001rt01.inetia.pl (87.204.224.31)  4.245 ms  4.084 ms  4.234 ms
+    6  warsh007rt11.inetia.pl (87.204.224.50)  5.769 ms  3.675 ms  5.317 ms
+    7  warsc006rt99.inetia.pl (87.204.224.85)  5.762 ms  5.734 ms  6.030 ms
+    8  warsh002rt22.inetia.pl (83.238.248.34)  8.661 ms  8.633 ms  5.254 ms
+    9  83-238-113-57.static.inetia.pl (83.238.113.57)  5.700 ms  5.980 ms  5.972 ms
+   10  * * *
+   (kolejne przeskoki ukryte/zablokowane filtrowaniem ICMP)
+
+--------------------------------------------------------------------------------
+10. PYTANIE: Adres serwera DNS, który jest ustawiony w systemie operacyjnym.
+    POLECENIE: cat /etc/resolv.conf | grep nameserver
+    WYNIK:
+    nameserver 192.168.88.1
+
+--------------------------------------------------------------------------------
+11. PYTANIE: Lista statycznych wpisów DNS w systemie.
+    POLECENIE: cat /etc/hosts
+    WYNIK:
+    # Static table lookup for hostnames.
+    # See hosts(5) for details.
+    127.0.0.1        localhost
+    ::1              localhost
+
+--------------------------------------------------------------------------------
+12. PYTANIE: Rekord DNS poczty e-mail kosmatka.pl korzystając z serwera DNS 8.8.8.8.
+    POLECENIE: nslookup -query=mx kosmatka.pl 8.8.8.8
+    WYNIK:
+    kosmatka.pl    mail exchanger = 10 mx2.privateemail.com.
+    kosmatka.pl    mail exchanger = 10 mx1.privateemail.com.
+
+--------------------------------------------------------------------------------
+13. PYTANIE: Adres IPv6 hosta google.pl.
+    POLECENIE: ping -6 google.pl (lub alternatywnie: nslookup -type=AAAA google.pl)
+
+--------------------------------------------------------------------------------
+14. PYTANIE: Data rejestracji domeny kosmatka.pl i do kiedy jest opłacona.
+    POLECENIE: whois kosmatka.pl
+    WYNIK:
+    created:                        2022.12.02 12:27:10
+    renewal date:                   2032.12.02 12:27:10
+
+--------------------------------------------------------------------------------
+15. PYTANIE: Adres strony z listą domen .pl usuniętych dzisiejszego dnia.
+    ODPOWIEDŹ: 
+    https://www.dns.pl/lista_domen_usunietych
+================================================================================
