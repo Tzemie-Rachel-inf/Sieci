@@ -1,0 +1,52 @@
+1. adres IP serwera: 10.0.1.3 (tshark -r tcp.pcap -T fields -e ip.dst | head -1)
+   adres MAC serwera: 52:34:7f:f0:12:d0 (tshark -r tcp.pcap -T fields -e eth.dst | head -1)
+   numer portu TCP: 7373 (tshark -r tcp.pcap -T fields -e tcp.dstport | head -1)
+   (dane dla pierwszego pakietu)
+
+2.
+3. 
+0000   7a 9b 67 94 85 b5 52 34 7f f0 12 d0 08 00 45 00   z.g...R4......E.
+0010   00 77 94 68 40 00 40 06 91 0c 0a 00 01 03 0a 00   .w.h@.@.........
+0020   00 0a 1c cd b8 c4 71 b1 ae 40 bf 9c b3 9f 80 18   ......q..@......
+0030   01 fe 93 92 00 00 01 01 08 0a dd 15 f5 34 29 2f   .............4)/
+0040   10 fa 4d 30 0a 54 36 34 30 30 30 2c 31 30 0a 5a   ..M0.T64000,10.Z
+0050   30 0a 53 6d 2d 30 2e 37 35 2c 39 35 2c 2d 31 0a   0.Sm-0.75,95,-1.
+0060   54 38 37 35 30 30 2c 31 30 0a 41 30 0a 57 30 0a   T87500,10.A0.W0.
+0070   44 30 0a 47 30 31 0a 53 6d 32 2e 38 32 2c 31 30   D0.G01.Sm2.82,10
+0080   30 2c 2d 31 0a                                    0,-1.
+4. frame contains "[Oo][Kk]"
+5. ip.src == 10.0.1.3 and len(tcp.payload) == 13
+
+6. arp.opcode == 2 or icmp.type == 0
+7. dns.qry.name contains "kosmatka.pl"
+kosmatka.pl: type A, class IN, addr 217.28.148.190
+Name: kosmatka.pl
+Type: A (1) (Host Address)
+Class: IN (0x0001)
+Time to live: 300 (5 minutes)
+Data length: 4
+Address: 217.28.148.190
+
+8. GET / HTTP/1.1
+Host: mm.kosmatka.pl
+User-Agent: Links (2.30; Linux 6.18.24-1-lts x86_64; GNU C 15.2.1; text)
+Accept: */*
+Accept-Language: en,*;q=0.1
+Accept-Encoding: gzip, deflate, br, zstd, bzip2, lzma, lzma2
+Accept-Charset: us-ascii,ISO-8859-1,ISO-8859-2,ISO-8859-3,ISO-8859-4,ISO-8859-5,ISO-8859-6,ISO-8859-7,ISO-8859-8,ISO-8859-9,ISO-8859-10,ISO-8859-13,ISO-8859-14,ISO-8859-15,ISO-8859-16,windows-1250,windows-1251,windows-1252,windows-1256,windows-1257,cp437,cp737,cp850,cp852,cp866,x-cp866-u,x-mac,x-mac-ce,x-kam-cs,koi8-r,koi8-u,koi8-ru,TCVN-5712,VISCII,utf-8
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Wed, 29 Apr 2026 04:46:15 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+X-Powered-By: PHP/8.5.2
+Content-Encoding: gzip
+
+
+9.
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wQGABsCuG9X8AAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABgElEQVQ4y52Tv0tCURTHP6+ePWxJigThCUKEgzk01BgPEpxsaqhNWmwJHtRa+AdkODVJ+QdIBM3im5RqEXTRkJbgLZZDEDwSb8N7/nwS1oHLvdxz7+d77jn3ACiA6sz/srXUybm4vjNFr9cTM1mpJEShIADmAOXdbNLtfmPUZpQ0DGi36QOQpB67kU+MOmMQo4Ybahjg80EqBYA86ksfwtktPL3A9joUyvZ+9RX0PedQowHB4OCOPBld5gjMD7i8B/8S7EQm1MNh0LTB1ty0JwaWbdDFAWhRMOo2lHzedVaemqC+OUrahh1RJhQaU3dHMHoZIJ22AVFIeKokrWOX3hBQLEK1aiv0h88H2awN+XokGfe4qjIECAG6Pu7VdfB6wTShUkHTVlylHgJisemfptmEchmSSQBScXh4/i2Jrrpm7AgCgUGFEltwejMCsCyLVquFEAJJkqaDOp3B0j8P+5uLXIEiA5aiKORyORRl9oZUVRVgVXLaOAgs/LGLLeDtB4jwnjHllMVCAAAAAElFTkSuQmCC
+10. tcpdump -i wlan0 -w output.pcap
