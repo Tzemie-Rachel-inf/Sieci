@@ -1,0 +1,30 @@
+instalacja serwera:
+sudo apt install isc-dhcp-server
+
+ustawienie sieci na serwerze:
+a. sudo ip link set eth1 down
+b. sudo ip addr add 10.123.85.1/24 dev eth1
+c. sudo ip link set eth1 up
+d. sudo ip route add default via 10.123.85.254 dev eth1
+e. sudo vim /etc/resolv.conf
+
+sudo vim /etc/dhcpd.conf
+
+logi:
+journalctl -xeu isc-dhcp-server (SERWER)
+ip addr (KLIENT)
+
+dhcpd.conf:
+option domain-name-servers 1.1.1.1;
+option subnet-mask 255.255.255.0;
+option routers 10.123.85.1;
+subnet 10.123.85.0 netmask 255.255.255.0 {
+  range 10.123.85.100 10.123.85.200;
+}
+
+
+start serwera:
+sudo systemctl start isc-dhcp-server
+
+przed zmiana MAC: 10.123.85.100
+po: 10.123.85.101
